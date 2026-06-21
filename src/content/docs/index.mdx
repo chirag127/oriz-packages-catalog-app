@@ -1,0 +1,55 @@
+---
+title: "Oriz Packages"
+description: "Auto-discovery catalog of all MIT-licensed @chirag127 npm packages from the oriz family."
+template: splash
+hero:
+  tagline: "Every MIT-licensed @chirag127 npm package — auto-discovered, grouped, searchable. Rebuilt nightly + on every release."
+  actions:
+    - text: Browse on GitHub
+      link: https://github.com/chirag127?tab=repositories&q=npm-pkg
+      icon: external
+      variant: minimal
+    - text: View on npm
+      link: https://www.npmjs.com/~chirag127
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Groups
+
+The catalog is split into five purpose-based groups. Click a card to explore.
+
+<CardGrid stagger>
+  <Card title="Astro foundation" icon="rocket">
+    Core building blocks every oriz app depends on — shell, chrome, config, content pipeline.
+  </Card>
+  <Card title="UI & widgets" icon="puzzle">
+    User-facing components — tools, icons, forms, MDX, TOC, comments, share, keyboard, feedback, affiliate, newsletter, search, PWA.
+  </Card>
+  <Card title="Data & auth" icon="seti:db">
+    Data layer, billing, and the cross-surface `auth-core` set (CLI, web extension, VS Code).
+  </Card>
+  <Card title="Distribution" icon="paper-plane">
+    Cross-post engine and distribution targets — get content and binaries out into the world.
+  </Card>
+  <Card title="Testing" icon="approve-check">
+    Test utilities and the AI-assisted test harness.
+  </Card>
+</CardGrid>
+
+## How this catalog works
+
+- **Auto-discovery** — at build time, every public, non-archived `chirag127/*-npm-pkg` repository on GitHub is enumerated. There is no manual package list anywhere in this repo.
+- **Per-package detail pages** — for each discovered repo we fetch the README from `raw.githubusercontent.com`, npm metadata from the registry, GitHub repo metadata, and bundle size from bundlephobia, then emit a Starlight page.
+- **Grouping** — each package is routed to one of the 5 groups via keyword rules in [`src/lib/groups.ts`](https://github.com/chirag127/oriz-packages-catalog-app/blob/main/src/lib/groups.ts). New packages added to `chirag127/*` will be auto-grouped on the next nightly rebuild.
+- **Rebuild cadence** — nightly at 04:00 IST, plus an immediate rebuild whenever any sibling `*-npm-pkg` repo dispatches a `package-published` event after a release.
+
+## Search
+
+Press <kbd>Ctrl</kbd> / <kbd>⌘</kbd> + <kbd>K</kbd> for full-text search powered by [Pagefind](https://pagefind.app). The index covers every package's README plus its metadata fields.
+
+## License
+
+Everything is MIT. See [`LICENSE`](https://github.com/chirag127/oriz-packages-catalog-app/blob/main/LICENSE).

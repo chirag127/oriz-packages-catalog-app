@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+.wrangler
+.env
+.env.local
+*.log
+
+# Build-time discovery cache (regenerated each build)
+.cache/

@@ -1,0 +1,14 @@
+name: Rebuild on package publish
+on:
+  repository_dispatch:
+    types: [package-published]
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  deployments: write
+jobs:
+  rebuild:
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
