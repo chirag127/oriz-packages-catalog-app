@@ -1,0 +1,48 @@
+---
+import Layout from "../../components/Layout.astro";
+import { catalog, getCategoryLabel } from "../../lib/data.ts";
+
+export function getStaticPaths() {
+  // Hard-coded category list — Astro requires getStaticPaths to be statically analyzable.
+  return [
+    { params: { cat: "astro" } },
+    { params: { cat: "auth" } },
+    { params: { cat: "utilities" } },
+  ];
+}
+
+const { cat } = Astro.params as { cat: "astro" | "auth" | "utilities" };
+const label = getCategoryLabel(cat);
+const pkgs = catalog.packages
+  .filter((p) => p.category === cat)
+  .sort((a, b) => a.shortName.localeCompare(b.shortName));
+
+// inline cards to avoid component import path issues
+import PackageCard from "../../components/PackageCard.astro";
+---
+<Layout title={`${label} packages`} current={cat} description={`All ${label.toLowerCase()} packages from the oriz family.`}>
+  <section class="hero">
+    <div class="eyebrow">category · {cat}</div>
+    <h1><span class="hl">{label}</span> packages</h1>
+    <p class="lede">
+      {cat === "astro" && "Astro integrations and building blocks. Drop-in components for any oriz app."}
+      {cat === "auth" && "Cross-surface auth utilities — CLI, web extension, VS Code, core."}
+      {cat === "utilities" && "Standalone utilities — AI providers, analytics, SEO, UI, rate-limiting, and more."}
+    </p>
+    <div class="stats">
+      <div><strong id="filter-count">{pkgs.length}</strong> packages</div>
+      <div><a href="/">← All packages</a></div>
+    </div>
+  </section>
+
+  {pkgs.length === 0 ? (
+    <div class="empty">
+      <h2>No packages in this category yet.</h2>
+      <p>Check back soon, or browse <a href="/">all packages</a>.</p>
+    </div>
+  ) : (
+    <div class="grid">
+      {pkgs.map((p) => <PackageCard pkg={p} />)}
+    </div>
+  )}
+</Layout>

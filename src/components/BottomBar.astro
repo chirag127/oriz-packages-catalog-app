@@ -1,0 +1,33 @@
+---
+// BottomBar.astro — mobile only
+const { current } = Astro.props as { current?: string };
+const items = [
+  { href: "/", label: "Home", key: "home", icon: "home" },
+  { href: "/", label: "All", key: "all", icon: "grid" },
+  { href: "/?focus=search", label: "Search", key: "search", icon: "search" },
+  { href: "/about", label: "About", key: "about", icon: "info" },
+  { href: "/account", label: "Me", key: "me", icon: "user" },
+];
+---
+<nav class="bottombar" aria-label="Mobile navigation">
+  {items.map((i) => (
+    <a href={i.href} class:list={[{ active: current === i.key }]}>
+      {i.icon === "home" && (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg>
+      )}
+      {i.icon === "grid" && (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      )}
+      {i.icon === "search" && (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      )}
+      {i.icon === "info" && (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+      )}
+      {i.icon === "user" && (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+      )}
+      <span>{i.label}</span>
+    </a>
+  ))}
+</nav>

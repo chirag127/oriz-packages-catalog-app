@@ -1,0 +1,35 @@
+---
+import Layout from "../components/Layout.astro";
+---
+<Layout title="Pricing" hideSidebar={true}>
+  <section class="hero">
+    <div class="eyebrow">Pricing</div>
+    <h1><span class="hl">Free.</span> All of it.</h1>
+    <p class="lede">Every package on this site is MIT-licensed and free to use commercially. There is no paid tier.</p>
+  </section>
+
+  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+    <article class="card">
+      <h3 class="card-title">Free</h3>
+      <p class="card-desc">Every package, every feature, every release. Forever.</p>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9375rem; color: #475569; display: flex; flex-direction: column; gap: 6px;">
+        <li>✓ All 23 packages</li>
+        <li>✓ MIT license — commercial use OK</li>
+        <li>✓ No telemetry</li>
+        <li>✓ Source-available on GitHub</li>
+      </ul>
+      <a href="/" class="button" style="margin-top: 8px; align-self: flex-start;">Browse the catalog</a>
+    </article>
+
+    <article class="card">
+      <h3 class="card-title">Sponsor</h3>
+      <p class="card-desc">If a package saved you a day, sponsor on GitHub. Optional, appreciated, no perks.</p>
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9375rem; color: #475569; display: flex; flex-direction: column; gap: 6px;">
+        <li>♥ Sustains maintenance</li>
+        <li>♥ Funds bug-fix time</li>
+        <li>♥ Pure good karma</li>
+      </ul>
+      <a href="https://github.com/sponsors/chirag127" rel="noopener" class="button ghost" style="margin-top: 8px; align-self: flex-start;">Sponsor on GitHub</a>
+    </article>
+  </div>
+</Layout>

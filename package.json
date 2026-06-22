@@ -10,7 +10,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "discover": "tsx src/lib/discover-packages.ts",
+    "discover": "node scripts/discover.mjs",
     "dev": "pnpm run discover && astro dev",
     "build": "pnpm run discover && astro build",
     "preview": "astro preview",
@@ -18,20 +18,15 @@
     "typecheck": "astro check"
   },
   "dependencies": {
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/starlight": "^0.30.0",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/inter-tight": "^5.1.0",
+    "@fontsource-variable/jetbrains-mono": "^5.1.0",
     "astro": "^6.0.0",
-    "cmdk": "^1.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "sharp": "^0.33.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
     "@types/node": "^22.10.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
 }

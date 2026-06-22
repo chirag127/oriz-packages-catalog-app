@@ -1,0 +1,23 @@
+---
+// Header.astro
+const { current } = Astro.props as { current?: string };
+const nav = [
+  { href: "/", label: "All", key: "all" },
+  { href: "/category/astro", label: "Astro", key: "astro" },
+  { href: "/category/auth", label: "Auth", key: "auth" },
+  { href: "/category/utilities", label: "Utilities", key: "utilities" },
+  { href: "/about", label: "About", key: "about" },
+];
+---
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="wordmark" aria-label="Oriz packages home">
+      <span class="wordmark-accent">oriz</span><span class="wordmark-slash">/</span><span>packages</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {nav.map((n) => (
+        <a href={n.href} class:list={[{ active: current === n.key }]}>{n.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

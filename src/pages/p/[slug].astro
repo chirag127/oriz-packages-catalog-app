@@ -1,0 +1,81 @@
+---
+import Layout from "../../components/Layout.astro";
+import { catalog, getCategoryLabel } from "../../lib/data.ts";
+
+export function getStaticPaths() {
+  return catalog.packages.map((p) => ({
+    params: { slug: p.slug },
+    props: { pkg: p },
+  }));
+}
+
+const { pkg } = Astro.props;
+const others = catalog.packages
+  .filter((p) => p.category === pkg.category && p.slug !== pkg.slug)
+  .slice(0, 5);
+---
+<Layout title={pkg.name} current={pkg.category} description={pkg.description}>
+  <section class="hero">
+    <div class="eyebrow">{getCategoryLabel(pkg.category)} package</div>
+    <h1>{pkg.title}</h1>
+    <p class="lede">{pkg.description}</p>
+    <div class="stats">
+      <div>{pkg.bundleSize} bundle</div>
+      <div>★ {pkg.stars}</div>
+      <div>Last publish: <strong>{pkg.lastPublish}</strong></div>
+      <div>MIT</div>
+    </div>
+  </section>
+
+  <div class="detail">
+    <div>
+      <div class="surface prose">
+        <h2>Install</h2>
+        <p>Click the snippet to copy:</p>
+        <button type="button" class="install" data-copy={pkg.install} aria-label={`Copy install command for ${pkg.name}`} style="font-size: 1.25rem; padding: 14px 18px;">
+          <span class="prompt">$</span>
+          <span>npm i </span>
+          <span class="pkg-scope">@chirag127/</span><span class="pkg-name">{pkg.shortName}</span>
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+
+        <h2 style="margin-top: 28px;">Usage</h2>
+        <p>Full usage docs land in v0.5 once we wire in <code>raw.githubusercontent.com</code> README fetching. For now, see the package's <a href={pkg.githubUrl} rel="noopener">GitHub README</a> for the latest examples.</p>
+
+        <h2 style="margin-top: 28px;">Links</h2>
+        <ul>
+          <li><a href={pkg.npmUrl} rel="noopener">npm: {pkg.name}</a></li>
+          <li><a href={pkg.githubUrl} rel="noopener">GitHub: chirag127/{pkg.repoSlug}</a></li>
+          <li><a href={`/category/${pkg.category}`}>More {getCategoryLabel(pkg.category)} packages</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="detail-side">
+      <div class="card">
+        <p class="subhead">Sister packages</p>
+        {others.length === 0 ? (
+          <p style="color: #475569; font-size: 0.875rem;">No sister packages yet.</p>
+        ) : (
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+            {others.map((o) => (
+              <li>
+                <a href={`/p/${o.slug}`} style="color: var(--color-card-fg); font-family: var(--font-utility); font-size: 0.875rem;">
+                  @chirag127/<strong>{o.shortName}</strong>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div class="card-meta" style="margin-top: 8px;">
+          <span>{pkg.bundleSize}</span>
+          <span>★ {pkg.stars}</span>
+          <span>{pkg.lastPublish}</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</Layout>

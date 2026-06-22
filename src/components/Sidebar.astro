@@ -1,0 +1,46 @@
+---
+// Sidebar.astro
+import { catalog } from "../lib/data.ts";
+const { current } = Astro.props as { current?: string };
+const cats = [
+  { slug: "astro", label: "Astro packages", count: catalog.categories.astro },
+  { slug: "auth", label: "Auth packages", count: catalog.categories.auth },
+  { slug: "utilities", label: "Utility packages", count: catalog.categories.utilities },
+];
+---
+<aside class="sidebar" aria-label="Filters">
+  <h4>Search</h4>
+  <input
+    type="search"
+    class="sidebar-search"
+    placeholder="Filter packages…"
+    aria-label="Filter packages"
+    id="catalog-filter"
+    autocomplete="off"
+  />
+
+  <h4>Categories</h4>
+  <ul>
+    <li>
+      <a href="/" class:list={[{ active: current === "all" }]}>
+        <span>All</span>
+        <span class="count">{catalog.count}</span>
+      </a>
+    </li>
+    {cats.map((c) => (
+      <li>
+        <a href={`/category/${c.slug}`} class:list={[{ active: current === c.slug }]}>
+          <span>{c.label}</span>
+          <span class="count">{c.count}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <h4>About</h4>
+  <ul>
+    <li><a href="/about">About this catalog</a></li>
+    <li><a href="https://github.com/chirag127" rel="noopener">GitHub →</a></li>
+    <li><a href="https://www.npmjs.com/~chirag127" rel="noopener">npm →</a></li>
+  </ul>
+</aside>

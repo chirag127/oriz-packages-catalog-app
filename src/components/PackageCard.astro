@@ -1,0 +1,35 @@
+---
+// PackageCard.astro
+import type { Pkg } from "../lib/data.ts";
+import { getCategoryLabel } from "../lib/data.ts";
+const { pkg } = Astro.props as { pkg: Pkg };
+---
+<article class="card" data-pkg-slug={pkg.slug} data-pkg-name={pkg.name} data-pkg-cat={pkg.category} data-pkg-search={`${pkg.shortName} ${pkg.description} ${pkg.category}`.toLowerCase()}>
+  <div class="card-head">
+    <h3 class="card-title"><a href={`/p/${pkg.slug}`}>{pkg.title}</a></h3>
+    <span class="badge" data-cat={pkg.category}>{getCategoryLabel(pkg.category)}</span>
+  </div>
+  <p class="card-desc">{pkg.description}</p>
+
+  <button type="button" class="install" data-copy={pkg.install} aria-label={`Copy install command for ${pkg.name}`}>
+    <span class="prompt">$</span>
+    <span>npm i </span>
+    <span class="pkg-scope">@chirag127/</span><span class="pkg-name">{pkg.shortName}</span>
+    <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </button>
+
+  <div class="card-meta">
+    <span title="Bundle size">{pkg.bundleSize}</span>
+    <span title="GitHub stars">★ {pkg.stars}</span>
+    <span title="Last publish">{pkg.lastPublish}</span>
+  </div>
+
+  <div class="card-links">
+    <a href={pkg.npmUrl} rel="noopener">npm ↗</a>
+    <a href={pkg.githubUrl} rel="noopener">GitHub ↗</a>
+    <a href={`/p/${pkg.slug}`}>Details →</a>
+  </div>
+</article>

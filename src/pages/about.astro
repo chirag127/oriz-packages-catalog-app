@@ -1,0 +1,35 @@
+---
+import Layout from "../components/Layout.astro";
+---
+<Layout title="About" current="about" hideSidebar={true}>
+  <section class="hero">
+    <div class="eyebrow">About</div>
+    <h1>About the <span class="hl">oriz packages</span> catalog</h1>
+    <p class="lede">An auto-discovery catalog of MIT-licensed <code>@chirag127/*</code> npm packages — the oriz family.</p>
+  </section>
+
+  <div class="surface prose">
+    <h2>What this is</h2>
+    <p>
+      Every public <code>chirag127/*-npm-pkg</code> repository is enumerated at build time and rendered as a card here, with a click-to-copy install snippet. No manual package list lives in this repo — add a new <code>*-npm-pkg</code> repo and it shows up on the next rebuild.
+    </p>
+
+    <h2>How packages are grouped</h2>
+    <ul>
+      <li><strong>Astro</strong> — anything starting with <code>astro-</code>: integrations, components, shell, chrome, content pipeline.</li>
+      <li><strong>Auth</strong> — anything starting with <code>auth-</code>: <code>auth-core</code>, <code>auth-cli</code>, <code>auth-wxt</code>, <code>auth-vsc</code>.</li>
+      <li><strong>Utilities</strong> — everything else: AI providers, analytics, SEO, UI, rate-limit, consent, omni-publish.</li>
+    </ul>
+
+    <h2>v0 scope</h2>
+    <p>
+      The current build uses a filesystem-only discovery script — package data is read from the local <code>projects/npm-packages/</code> directory. Bundle size, GitHub stars, and last-publish are stub values right now. Real metadata from the GitHub API, npm registry, and bundlephobia ships in v0.5.
+    </p>
+
+    <h2>License</h2>
+    <p>Everything you find here is <strong>MIT</strong>. The catalog code itself is also MIT — see <a href="https://github.com/chirag127/oriz-packages-catalog-app" rel="noopener">the repo</a>.</p>
+
+    <h2>Hosting</h2>
+    <p>This site is built with <a href="https://astro.build" rel="noopener">Astro</a> and hosted on <a href="https://pages.cloudflare.com" rel="noopener">Cloudflare Pages</a>. The custom slate-and-cyan theme is hand-rolled — no design framework, no UI kit.</p>
+  </div>
+</Layout>

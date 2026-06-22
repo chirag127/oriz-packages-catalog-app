@@ -1,0 +1,104 @@
+---
+// Layout.astro — root layout, applies shell + theme + injects copy/filter scripts
+import "../styles/global.css";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Sidebar from "./Sidebar.astro";
+import BottomBar from "./BottomBar.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: string;
+  hideSidebar?: boolean;
+}
+
+const {
+  title,
+  description = "Auto-discovery catalog of @chirag127 npm packages — find, install, ship.",
+  current = "all",
+  hideSidebar = false,
+} = Astro.props as Props;
+
+const fullTitle = title === "Oriz Packages" ? title : `${title} · Oriz Packages`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1E293B" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Oriz Packages" />
+    <link rel="canonical" href={`https://packages.oriz.in${Astro.url.pathname}`} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <div class="shell">
+      <Header current={current} />
+      <main class="shell-main" style={hideSidebar ? "grid-template-columns: 1fr;" : ""}>
+        {!hideSidebar && <Sidebar current={current} />}
+        <div>
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+    <BottomBar current={current} />
+
+    <script is:inline>
+      // Click-to-copy install snippet
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".install");
+        if (!btn) return;
+        const text = btn.getAttribute("data-copy");
+        if (!text) return;
+        const done = () => {
+          btn.classList.add("copied");
+          setTimeout(() => btn.classList.remove("copied"), 1400);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done).catch(() => {
+            // fallback
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (_) {}
+            ta.remove();
+            done();
+          });
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (_) {}
+          ta.remove();
+          done();
+        }
+      });
+
+      // Live filter (sidebar search)
+      const input = document.getElementById("catalog-filter");
+      if (input) {
+        input.addEventListener("input", () => {
+          const q = input.value.trim().toLowerCase();
+          const cards = document.querySelectorAll(".card[data-pkg-search]");
+          let shown = 0;
+          cards.forEach((c) => {
+            const hay = c.getAttribute("data-pkg-search") || "";
+            const match = !q || hay.includes(q);
+            c.style.display = match ? "" : "none";
+            if (match) shown++;
+          });
+          const counter = document.getElementById("filter-count");
+          if (counter) counter.textContent = String(shown);
+        });
+      }
+    </script>
+  </body>
+</html>

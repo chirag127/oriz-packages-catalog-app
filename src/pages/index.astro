@@ -1,0 +1,25 @@
+---
+import Layout from "../components/Layout.astro";
+import PackageCard from "../components/PackageCard.astro";
+import { catalog } from "../lib/data.ts";
+
+const pkgs = [...catalog.packages].sort((a, b) => a.shortName.localeCompare(b.shortName));
+---
+<Layout title="Oriz Packages" current="all" description="Auto-discovery catalog of all 23 @chirag127/* npm packages — find, install, ship.">
+  <section class="hero">
+    <div class="eyebrow">packages.oriz.in · v0</div>
+    <h1>Every <span class="hl">@chirag127</span> package, in one place.</h1>
+    <p class="lede">Auto-discovered from <code>chirag127/*-npm-pkg</code> repositories. Click the install snippet to copy. MIT-licensed, source-available, ship-ready.</p>
+    <div class="stats">
+      <div><strong id="filter-count">{catalog.count}</strong> packages</div>
+      <div><strong>{catalog.categories.astro}</strong> Astro</div>
+      <div><strong>{catalog.categories.auth}</strong> Auth</div>
+      <div><strong>{catalog.categories.utilities}</strong> Utilities</div>
+      <div>MIT licensed</div>
+    </div>
+  </section>
+
+  <div class="grid">
+    {pkgs.map((p) => <PackageCard pkg={p} />)}
+  </div>
+</Layout>

@@ -1,0 +1,46 @@
+---
+// Footer.astro
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <a href="/" class="wordmark" style="display:inline-block; margin-bottom: 12px;">
+        <span class="wordmark-accent">oriz</span><span class="wordmark-slash">/</span><span>packages</span>
+      </a>
+      <p class="footer-tag">An auto-discovery catalog of MIT-licensed <code>@chirag127/*</code> npm packages from the oriz family. Find one, install, ship.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Browse</h5>
+      <ul>
+        <li><a href="/">All packages</a></li>
+        <li><a href="/category/astro">Astro</a></li>
+        <li><a href="/category/auth">Auth</a></li>
+        <li><a href="/category/utilities">Utilities</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <ul>
+        <li><a href="https://www.npmjs.com/~chirag127" rel="noopener">npm profile</a></li>
+        <li><a href="https://github.com/chirag127" rel="noopener">GitHub</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/refunds">Refunds</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+        <li><a href="/sign-in">Sign in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-inner" style="margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--color-border); font-size: 0.8125rem; color: var(--color-muted); grid-template-columns: 1fr;">
+    <span>© {year} Chirag Singhal · MIT licensed · Built with Astro · Hosted on Cloudflare Pages</span>
+  </div>
+</footer>

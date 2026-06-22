@@ -1,0 +1,22 @@
+---
+import Layout from "../components/Layout.astro";
+---
+<Layout title="Privacy" hideSidebar={true}>
+  <section class="hero">
+    <div class="eyebrow">Legal</div>
+    <h1>Privacy</h1>
+    <p class="lede">We don't want your data. We don't have your data. Here's the short version.</p>
+  </section>
+  <div class="surface prose">
+    <h2>What we collect</h2>
+    <ul>
+      <li>Standard Cloudflare edge logs (IP, user agent, request path). Retained per Cloudflare's defaults.</li>
+      <li>No cookies. No analytics scripts. No fingerprinting.</li>
+    </ul>
+    <h2>What we share</h2>
+    <p>Nothing. There's no one to share it with.</p>
+    <h2>Contact</h2>
+    <p>Open an issue on <a href="https://github.com/chirag127/oriz-packages-catalog-app" rel="noopener">GitHub</a>.</p>
+    <p style="color: var(--color-muted); font-size: 0.875rem; margin-top: 32px;">This is a v0 stub. The full policy lands once the catalog grows past the static-site stage.</p>
+  </div>
+</Layout>
