@@ -35,6 +35,14 @@ const fullTitle = title === "Oriz Packages" ? title : `${title} · Oriz Packages
     <meta property="og:site_name" content="Oriz Packages" />
     <link rel="canonical" href={`https://packages.oriz.in${Astro.url.pathname}`} />
     <title>{fullTitle}</title>
+    {import.meta.env.PUBLIC_ADSENSE_CLIENT && (
+      <script
+        is:inline
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT}`}
+        crossorigin="anonymous"
+      />
+    )}
   </head>
   <body>
     <div class="shell">

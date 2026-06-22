@@ -1,46 +1,142 @@
 ---
-// Footer.astro
-const year = new Date().getFullYear();
+/*
+ * packages-catalog-app Footer — npm-catalog directory surface.
+ *
+ * Signature element: a single mono "npm install" line at the top of the
+ * footer that copies on click — the one bold detail. Everything else
+ * stays catalogue-quiet with the dark-slate base.
+ * Astro / Auth / Utility / All packages + LegalFooter.
+ *
+ * Palette: slate-900 #1E293B / cyan #06B6D4 / amber #F59E0B.
+ */
+import LegalFooter from '@chirag127/astro-chrome/legal/LegalFooter.astro'
+
+const groups = [
+  {
+    label: 'Astro packages',
+    items: [
+      { name: '@chirag127/astro-chrome', slug: 'astro-chrome' },
+      { name: '@chirag127/astro-shell', slug: 'astro-shell' },
+      { name: '@chirag127/astro-data', slug: 'astro-data' },
+      { name: '@chirag127/astro-forms', slug: 'astro-forms' },
+      { name: '@chirag127/astro-tools', slug: 'astro-tools' },
+    ],
+  },
+  {
+    label: 'Auth packages',
+    items: [
+      { name: '@chirag127/auth-core', slug: 'auth-core' },
+      { name: '@chirag127/auth-wxt', slug: 'auth-wxt' },
+      { name: '@chirag127/auth-vsc', slug: 'auth-vsc' },
+      { name: '@chirag127/auth-cli', slug: 'auth-cli' },
+    ],
+  },
+  {
+    label: 'Utility packages',
+    items: [
+      { name: '@chirag127/omni-publish', slug: 'omni-publish' },
+      { name: '@chirag127/oriz-book-build', slug: 'oriz-book-build' },
+      { name: '@chirag127/oriz-ai-providers', slug: 'oriz-ai-providers' },
+      { name: '@chirag127/oriz-seo', slug: 'oriz-seo' },
+      { name: '@chirag127/oriz-analytics', slug: 'oriz-analytics' },
+    ],
+  },
+]
 ---
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-col">
-      <a href="/" class="wordmark" style="display:inline-block; margin-bottom: 12px;">
-        <span class="wordmark-accent">oriz</span><span class="wordmark-slash">/</span><span>packages</span>
-      </a>
-      <p class="footer-tag">An auto-discovery catalog of MIT-licensed <code>@chirag127/*</code> npm packages from the oriz family. Find one, install, ship.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Browse</h5>
+<footer class="pc-footer" role="contentinfo">
+  <button
+    type="button"
+    class="pc-install"
+    data-copy="npx @chirag127/oriz-packages browse"
+    aria-label="Copy install command"
+  >
+    <span class="pc-prompt" aria-hidden="true">$</span>
+    <span class="pc-cmd">npx @chirag127/oriz-packages browse</span>
+    <span class="pc-copy-hint" aria-hidden="true">click to copy</span>
+  </button>
+  <div class="pc-grid">
+    {groups.map((g) => (
+      <div class="pc-col">
+        <h3 class="pc-h">{g.label}</h3>
+        <ul>
+          {g.items.map((i) => (
+            <li><a href={`/p/${i.slug}/`}><code>{i.name}</code></a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    <div class="pc-col">
+      <h3 class="pc-h">All packages</h3>
       <ul>
-        <li><a href="/">All packages</a></li>
+        <li><a href="/">Catalog home</a></li>
         <li><a href="/category/astro">Astro</a></li>
         <li><a href="/category/auth">Auth</a></li>
         <li><a href="/category/utilities">Utilities</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Resources</h5>
-      <ul>
-        <li><a href="https://www.npmjs.com/~chirag127" rel="noopener">npm profile</a></li>
-        <li><a href="https://github.com/chirag127" rel="noopener">GitHub</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/pricing">Pricing</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Legal</h5>
-      <ul>
-        <li><a href="/privacy">Privacy</a></li>
-        <li><a href="/terms">Terms</a></li>
-        <li><a href="/refunds">Refunds</a></li>
-        <li><a href="/disclaimer">Disclaimer</a></li>
-        <li><a href="/sign-in">Sign in</a></li>
+        <li><a href="https://www.npmjs.com/~chirag127" rel="noopener external">npm profile</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer-inner" style="margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--color-border); font-size: 0.8125rem; color: var(--color-muted); grid-template-columns: 1fr;">
-    <span>© {year} Chirag Singhal · MIT licensed · Built with Astro · Hosted on Cloudflare Pages</span>
-  </div>
+  <LegalFooter
+    appName="Oriz Packages"
+    bio="Auto-discovery catalog of MIT-licensed @chirag127/* npm packages."
+  />
 </footer>
+<style>
+  .pc-footer {
+    margin-top: 64px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.18));
+    border-top: 1px solid var(--color-border, rgba(250,250,249,0.15));
+    color: var(--color-fg, #FAFAF9);
+  }
+  .pc-install {
+    display: flex; align-items: center; gap: 10px;
+    max-width: 1200px; width: calc(100% - 32px);
+    margin: 32px auto 24px;
+    padding: 14px 18px;
+    background: var(--color-slate-deep, #0F172A);
+    border: 1px solid var(--color-accent, #06B6D4);
+    border-radius: var(--radius-md, 12px);
+    font-family: var(--font-utility, 'JetBrains Mono'), ui-monospace, monospace;
+    color: var(--color-fg, #FAFAF9);
+    cursor: pointer; text-align: left;
+    transition: box-shadow 160ms ease, border-color 160ms ease;
+  }
+  .pc-install:hover { box-shadow: 0 0 0 3px rgba(6,182,212,0.18); }
+  .pc-install.copied { border-color: var(--color-amber, #F59E0B); }
+  .pc-prompt { color: var(--color-accent, #06B6D4); font-weight: 600; }
+  .pc-cmd { flex: 1; font-size: 14px; }
+  .pc-copy-hint { font-size: 11px; color: var(--color-muted, #94A3B8); text-transform: uppercase; letter-spacing: 0.12em; }
+  .pc-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr; gap: 28px;
+    padding: 8px 16px 24px;
+  }
+  .pc-h {
+    margin: 0 0 12px;
+    font-family: var(--font-display, 'Inter Tight'), sans-serif;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--color-muted, #94A3B8); font-weight: 600;
+  }
+  .pc-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+  .pc-col a { color: var(--color-fg, #FAFAF9); font-size: 14px; text-decoration: none; }
+  .pc-col a code { font-family: var(--font-utility, 'JetBrains Mono'), ui-monospace; font-size: 12.5px; color: var(--color-fg, #FAFAF9); background: transparent; padding: 0; }
+  .pc-col a:hover code, .pc-col a:hover { color: var(--color-accent, #06B6D4); text-decoration: underline; }
+  @media (min-width: 768px) { .pc-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding: 12px 24px 28px; } }
+  @media (min-width: 1024px) { .pc-grid { grid-template-columns: repeat(4, 1fr); padding: 16px 24px 32px; } }
+</style>
+<script is:inline>
+  // Click-to-copy for the npm install snippet (uses existing global handler
+  // via .install class in catalog Layout.astro — but here we wire a direct
+  // handler too so it works even if the global one is absent).
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pc-install');
+    if (!btn) return;
+    const text = btn.getAttribute('data-copy');
+    if (!text || !navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1400);
+    }).catch(() => {});
+  });
+</script>
