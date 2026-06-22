@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T08:51:12.124Z",
+  "generatedAt": "2026-06-22T16:11:14.349Z",
   "count": 23,
   "categories": {
     "astro": 11,
@@ -13,7 +13,7 @@
       "name": "@chirag127/astro-billing",
       "shortName": "astro-billing",
       "title": "Astro Billing",
-      "description": "Razorpay checkout + license-key verify + <Paywall> + <PriceTag> for one-subscription-unlocks-all.",
+      "description": "Razorpay checkout (single-domain on oriz.in) + 3-tier <Pricing /> + Firestore webhook for the oriz family.",
       "category": "astro",
       "install": "npm i @chirag127/astro-billing",
       "npmUrl": "https://www.npmjs.com/package/@chirag127/astro-billing",
@@ -28,7 +28,7 @@
       "name": "@chirag127/astro-chrome",
       "shortName": "astro-chrome",
       "title": "Astro Chrome",
-      "description": "Shared visual chrome for chirag127 Astro sites — Header / Footer / Wordmark / AccountPanel / FinishSignIn / MultiSearch / StatusBanner / ConsentBanner. Mobile-first responsive at 320/768/1024/1440. Peer-deps on @chirag127/astro-shell.",
+      "description": "Shared visual chrome for chirag127 Astro sites — Header / Footer / Wordmark / AccountPanel / FinishSignIn / MultiSearch / StatusBanner / ConsentBanner / LegalFooter. Mobile-first responsive at 320/768/1024/1440. Peer-deps on @chirag127/astro-shell.",
       "category": "astro",
       "install": "npm i @chirag127/astro-chrome",
       "npmUrl": "https://www.npmjs.com/package/@chirag127/astro-chrome",
@@ -118,7 +118,7 @@
       "name": "@chirag127/astro-shell",
       "shortName": "astro-shell",
       "title": "Astro Shell",
-      "description": "Astro 6 base layer — shell() defineConfig wrapper + OrizSiteConfig type + integrations preset (React + sitemap + MDX) + Tailwind v4 vite plugin + reusable Cloudflare Pages deploy workflow + design tokens (CSS custom properties + TS const).",
+      "description": "Astro 6 base layer — shell() defineConfig wrapper + OrizSiteConfig type + integrations preset (React + sitemap + MDX) + Tailwind v4 vite plugin + reusable Cloudflare Pages deploy workflow + design tokens + dynamic family-data registry (FAMILY_APPS / FAMILY_PACKAGES / FAMILY_APIS / FAMILY_BOOKS / FAMILY_EXTENSIONS / FAMILY_SKILLS).",
       "category": "astro",
       "install": "npm i @chirag127/astro-shell",
       "npmUrl": "https://www.npmjs.com/package/@chirag127/astro-shell",
